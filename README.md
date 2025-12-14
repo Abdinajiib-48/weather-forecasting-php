@@ -30,12 +30,16 @@ The main idea is to combine **database management** with **real-time API integra
 
 ---
 
-## ⚙️ Setup Instructions
-1. Install **XAMPP** and start **Apache** + **MySQL**.  
-2. Place the project folder in:  
-3. Create a database named **WeatherDB** (or let `db_init()` create it automatically).  
-4. Open `index.php` and add your OpenWeatherMap API key:  
-```php
-$apiKey = "YOUR_OPENWEATHERMAP_API_KEY";
-5. Run the project in your browser:
-http://localhost/weather_Forcasting/index.php
+## Setup
+1. Install XAMPP and start Apache + MySQL
+2. Place project in htdocs/weather_Forcasting
+3. Create database WeatherDB
+4. Add your API key in index.php
+5. Run http://localhost/weather_Forcasting/index.php
+
+## Team Roles
+- Member 1: Database initialization
+- Member 2: Table creation
+- Member 3: API integration
+- Member 4: Frontend design
+- Member 5: Documentation & presentation
