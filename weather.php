@@ -93,3 +93,61 @@
             </div>
         </div>
     </section>
+    
+<section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <?php
+                    $sql = "SELECT * FROM CityTable";
+                    $result = $conn->query($sql);
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $city = $row["city"];
+                            $string = "http://api.openweathermap.org/data/2.5/weather?q=" . $city . "&units=metric&appid=" . $apiKey;
+                            $payload = file_get_contents($string);
+                            if ($payload !== false) {
+                                $data = json_decode($payload, true);
+                                $temp = $data['main']['temp'];
+                                $humidity = $data['main']['humidity'];
+                                $wind = $data['wind']['speed'];
+                                $icon = $data['weather'][0]['icon'];
+                                $desc = $data['weather'][0]['description'];
+                    ?>
+                                <div class="box">
+                                    <article class="media">
+                                        <div class="media-left">
+                                            <figure class="image is-50x50">
+                                                <img src="http://openweathermap.org/img/w/<?php echo $icon ?>.png" alt="Weather Icon">
+                                            </figure>
+                                        </div>
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <p>
+                                                    <span class="title"><?php echo htmlspecialchars($city); ?></span>
+                                                    <br>
+                                                    <span class="subtitle"><?php echo $temp ?> °C</span>
+                                                    <br> Humidity: <?php echo $humidity ?> %
+                                                    <br> Wind Speed: <?php echo $wind ?> m/s
+                                                    <br> <?php echo ucfirst($desc); ?>
+                                                </ p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                    <?php
+                            }
+                        }
+                    }
+                    db_close($conn);
+                    ?>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+    </footer>
+</body>
+
+</html>
